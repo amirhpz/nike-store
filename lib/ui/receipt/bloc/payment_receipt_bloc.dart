@@ -11,16 +11,18 @@ class PaymentReceiptBloc
     extends Bloc<PaymentReceiptEvent, PaymentReceiptState> {
   final IOrderRepository repository;
   PaymentReceiptBloc(this.repository) : super(PaymentReceiptLoading()) {
-    on<PaymentReceiptEvent>((event, emit) async {
-      if (event is PaymentReceiptStarted) {
-        try {
-          emit(PaymentReceiptLoading());
-          final response = await repository.getPaymentReceipt(event.orderId);
-          emit(PaymentReceiptSuccess(response));
-        } catch (e) {
-          emit(PaymentReceiptError(AppException()));
+    on<PaymentReceiptEvent>(
+      (event, emit) async {
+        if (event is PaymentReceiptStarted) {
+          try {
+            emit(PaymentReceiptLoading());
+            final response = await repository.getPaymentReceipt(event.orderId);
+            emit(PaymentReceiptSuccess(response));
+          } catch (e) {
+            emit(PaymentReceiptError(AppException()));
+          }
         }
-      }
-    });
+      },
+    );
   }
 }
