@@ -28,6 +28,7 @@ class AuthRemoteDataSource
     return AuthInfo(
       response.data["access_token"],
       response.data["refresh_token"],
+      username,
     );
   }
 
@@ -41,7 +42,10 @@ class AuthRemoteDataSource
     });
     validateResponse(response);
     return AuthInfo(
-        response.data["access_token"], response.data["refresh_token"]);
+      response.data["access_token"],
+      response.data["refresh_token"],
+      response.data["username"],
+    );
   }
 
   @override
