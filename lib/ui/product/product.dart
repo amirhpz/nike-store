@@ -69,11 +69,15 @@ class _ProductItemState extends State<ProductItem> {
                             shape: BoxShape.circle,
                             color: Colors.white,
                           ),
-                          child: Icon(
-                              favoriteManager.isFovorite(widget.product)
-                                  ? CupertinoIcons.heart_fill
-                                  : CupertinoIcons.heart,
-                              size: 20),
+                          child: ValueListenableBuilder(
+                              valueListenable: favoriteManager.listenable,
+                              builder: (context, product, child) {
+                                return Icon(
+                                    favoriteManager.isFovorite(widget.product)
+                                        ? CupertinoIcons.heart_fill
+                                        : CupertinoIcons.heart,
+                                    size: 20);
+                              }),
                         ),
                       ),
                     ),

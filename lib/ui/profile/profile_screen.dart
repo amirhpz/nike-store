@@ -4,6 +4,7 @@ import 'package:nike_ecommerce_flutter/data/auth_info.dart';
 import 'package:nike_ecommerce_flutter/data/repo/auth_repository.dart';
 import 'package:nike_ecommerce_flutter/data/repo/cart_repository.dart';
 import 'package:nike_ecommerce_flutter/ui/auth/auth.dart';
+import 'package:nike_ecommerce_flutter/ui/favorites/favorite_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -44,7 +45,13 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   const Divider(),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const FavoritesListScreen(),
+                        ),
+                      );
+                    },
                     child: Container(
                       height: 36,
                       padding: const EdgeInsets.only(left: 16, right: 16),
